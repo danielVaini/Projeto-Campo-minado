@@ -1,22 +1,15 @@
 import React from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
 import params from './src/params';
+import Field from './src/components/Field';
+
+
 
 const App = () => {
   return (
@@ -25,7 +18,22 @@ const App = () => {
         <Text style={styles.welcome}>
           Iniciando o Mines
         </Text>
-        <Text>{params.getColumnsAmount()}x{params.getRowsAmount()}</Text>
+        <Text>Numero de colunas: {params.getColumnsAmount()}</Text>
+        <Text>Numero de linhas: {params.getRowsAmount()}</Text>
+        <Field />
+        <Field opened/>
+        <Field opened nearMines={1}/>
+        <Field opened nearMines={2}/>
+        <Field opened nearMines={3}/>
+        <Field opened nearMines={4}/>
+        <Field opened nearMines={6}/>
+        <Field mined />
+        <Field mined opened/>
+        <Field mined opened exploded/>
+        <Field mined flag/>
+        <Field flag opened/>
+
+
       </View>
 
     </>
