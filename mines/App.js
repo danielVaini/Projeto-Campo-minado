@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -8,51 +8,64 @@ import {
 
 import params from './src/params';
 import Field from './src/components/Field';
+import MineField from './src/components/MineField';
+import {
+  createMinedBoard,
+} from './src/functions';
 
 
 
-const App = () => {
-  return (
-    <>
+export default class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = this.createState();
+  }
+
+  minesAmount = () => {
+    const cols = params.getColumnsAmount();
+    const rows = params.getRowsAmount();
+    return Math.ceil(cols * rows * params.difficultLevel);
+  };
+
+  createState = () => {
+    const cols = params.getColumnsAmount();
+    const rows = params.getRowsAmount();
+    return {
+      board: createMinedBoard(rows, cols, this.minesAmount()),
+    };
+  };
+  render(){
+
+    return (
+      <>
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Iniciando o Mines
         </Text>
         <Text>Numero de colunas: {params.getColumnsAmount()}</Text>
         <Text>Numero de linhas: {params.getRowsAmount()}</Text>
-        <Field />
-        <Field opened/>
-        <Field opened nearMines={1}/>
-        <Field opened nearMines={2}/>
-        <Field opened nearMines={3}/>
-        <Field opened nearMines={4}/>
-        <Field opened nearMines={6}/>
-        <Field mined />
-        <Field mined opened/>
-        <Field mined opened exploded/>
-        <Field mined flag/>
-        <Field flag opened/>
-
+        <View style={styles.board}>
+          <MineField board={this.state.board} />
+        </View>
 
       </View>
 
     </>
   );
-};
+}
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5fcff',
+    justifyContent: 'flex-end',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  board: {
+    alignContent: 'center',
+    backgroundColor: '#AAA',
   },
 
 });
 
-export default App;
+

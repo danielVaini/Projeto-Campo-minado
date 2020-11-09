@@ -7,7 +7,7 @@ import Flag from './Flag';
 
 export default props => {
 
-  const { mined, opened, nearMines, exploded, flag } = props;
+  const { mined, opened, nearMines, exploded, flaged } = props;
 
   const styleField = [styles.field];
   // outros estilos aqui
@@ -19,7 +19,7 @@ export default props => {
     styleField.push(styles.exploded);
   }
 
-  if (flag){
+  if (flaged){
     styleField.push(styles.flag);
   }
 
@@ -46,7 +46,7 @@ export default props => {
             {nearMines}
           </Text> : false}
           {mined && opened ? <Mine /> : false}
-          {mined && !opened && flag ? <Flag /> : false}
+          {mined && !opened && flaged ? <Flag /> : false}
     </View>
   );
 
